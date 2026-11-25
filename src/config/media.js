@@ -3,7 +3,6 @@ export const MEDIA = {
   logo: '/assets/logo.png',
   heroDesktop: '/assets/hero-desktop.mp4',     // 15,6 s: server → cavo → retro del monitor → giro → sito → logo. 1600x900, keyframe ogni 3 fotogrammi (scroll fluido)
   heroMobile: '/assets/hero-mobile.mp4',       // 960x960 quadrato per telefono
-  heroMaster: '/assets/hero-master-1080p.mp4', // alta qualità 1920x1080 (archivio / social), non usato dal sito
   heroPoster: '/assets/hero-poster.jpg',
   deskVideo: '/assets/desk.mp4',
   deskPoster: '/assets/desk-poster.jpg',

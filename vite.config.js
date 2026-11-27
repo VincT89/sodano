@@ -19,8 +19,11 @@ function mock(server) {
     });
 }
 
-export default defineConfig({
+export default defineConfig(({ isSsrBuild }) => ({
   plugins: [react(), devContactMock],
   server: { port: 5173, open: true },
-  build: { chunkSizeWarningLimit: 2500 } // il globo 3D è un pezzo separato, caricato solo vicino alla sezione
-});
+  build: {
+    chunkSizeWarningLimit: 2500, // il globo 3D è un pezzo separato, caricato solo vicino alla sezione
+    copyPublicDir: !isSsrBuild // la build per il prerendering non ha bisogno di video e immagini
+  }
+}));

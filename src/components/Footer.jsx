@@ -1,9 +1,13 @@
 import { useLang } from '../i18n/LanguageContext.jsx';
 import { useConsent } from '../consent/ConsentContext.jsx';
-import { MEDIA, COMPANY, CONTACTS } from '../config/media.js';
+import { MEDIA, COMPANY, CONTACTS, PILLARS } from '../config/media.js';
+import { Link } from '../router/Router.jsx';
+import { pathFor, liveServices, liveSolutions } from '../router/routes.js';
 
 export default function Footer() {
-  const { t } = useLang();
+  const { t, lang } = useLang();
+  const services = liveServices(lang);
+  const solutions = liveSolutions(lang);
   const { openPreferences } = useConsent();
   return (
     <footer className="footer">
@@ -22,10 +26,35 @@ export default function Footer() {
           <a href={'mailto:' + CONTACTS.pec}>PEC {CONTACTS.pec}</a>
           {CONTACTS.offices.map((o) => <a key={o.key} href={o.phoneHref}>{o.city} · {o.phone}</a>)}
         </div>
+        {services.length > 0 && (
+          <div className="footer-col footer-services">
+            <p className="footer-head">{t.navServices}</p>
+            {/* servizi raggruppati per area, in righe compatte */}
+            {['dev', 'mkt', 'sys'].map((area) => {
+              const list = services.filter((x) => x.pillar === area);
+              return list.length > 0 && (
+                <div className="footer-area" key={area}>
+                  <span className="footer-area-name">{PILLARS[area].title}</span>
+                  <span className="footer-area-links">
+                    {list.map((x) => <Link key={x.id} to={pathFor('service', lang, x.id)}>{x.content[lang].title}</Link>)}
+                  </span>
+                </div>
+              );
+            })}
+            {solutions.length > 0 && (
+              <div className="footer-area">
+                <span className="footer-area-name">{t.navSolutions}</span>
+                <span className="footer-area-links">
+                  {solutions.map((x) => <Link key={x.id} to={pathFor('solution', lang, x.id)}>{x.content[lang].name}</Link>)}
+                </span>
+              </div>
+            )}
+          </div>
+        )}
         <div className="footer-col">
           <p className="footer-head">{t.legal}</p>
-          <a href="#/privacy-policy">{t.legalPrivacy}</a>
-          <a href="#/cookie-policy">{t.legalCookie}</a>
+          <Link to={pathFor('privacy', lang)}>{t.legalPrivacy}</Link>
+          <Link to={pathFor('cookie', lang)}>{t.legalCookie}</Link>
           <button type="button" className="footer-link" onClick={openPreferences}>{t.ckManage}</button>
         </div>
       </div>

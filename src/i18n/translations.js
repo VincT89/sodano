@@ -1,7 +1,7 @@
 /* Testi del sito nelle 4 lingue. Le versioni DE e NL vanno fatte rileggere da un madrelingua. */
 export const TRANSLATIONS = {
   it: {
-    navAbout: 'Chi siamo', navServices: 'Servizi', navMap: 'Paesi', navContact: 'Contatti',
+    navAbout: 'Chi siamo', navServices: 'Servizi', navMap: 'Paesi', navContact: 'Contatti', menuOpen: 'Menu', menuClose: 'Chiudi',
     heroEyebrow: 'Partner tecnologico per PMI e PA · dal 2015',
     w1: 'Strategia.', w2: 'Innovazione.', w3: 'Performance.',
     scrollHint: 'Scorri per entrare',
@@ -9,7 +9,7 @@ export const TRANSLATIONS = {
     beat2: 'I tuoi dati viaggiano veloci e sicuri sulla nostra rete.',
     beat3: 'Fino al tuo sito, sullo schermo dei tuoi clienti.',
     heroSub: 'Sviluppo software, marketing digitale e infrastrutture IT: un unico partner per la trasformazione digitale della tua azienda.',
-    cta1: 'Consulenza gratuita', cta2: 'Scopri i servizi',
+    cta1: 'Contattaci', cta2: 'Scopri i servizi',
     aboutTitle: 'Cresciamo insieme ai nostri clienti.',
     aboutBody: 'Sodano Consulting nasce nel 2015 a Valenzano (Bari), con una sede commerciale a Roma, da un’idea semplice: portare a imprese e Pubbliche Amministrazioni la tecnologia giusta, al momento giusto.',
     aboutBody2: 'Sviluppatori, creativi e sistemisti lavorano in un unico team. Così strategia, software e infrastruttura parlano la stessa lingua, e i risultati si vedono.',
@@ -25,7 +25,7 @@ export const TRANSLATIONS = {
     mapGo: 'Apri il sito',
     globeHint: 'Trascina per ruotare · clicca un paese per cambiare lingua',
     contactTitle: 'Parliamo del tuo progetto.',
-    contactSub: 'Raccontaci di cosa hai bisogno: la prima consulenza è gratuita.',
+    contactSub: 'Raccontaci di cosa hai bisogno e ti ricontatteremo.',
     office: 'Sede', phone: 'Telefono',
     officeAdmin: 'Sede amministrativa', officeSales: 'Sede commerciale',
     fName: 'Nome e cognome', fCompany: 'Azienda', fMsg: 'Come possiamo aiutarti?', fSend: 'Invia richiesta',
@@ -39,7 +39,7 @@ export const TRANSLATIONS = {
     langSwitched: 'Sito in italiano'
   },
   en: {
-    navAbout: 'About us', navServices: 'Services', navMap: 'Countries', navContact: 'Contact',
+    navAbout: 'About us', navServices: 'Services', navMap: 'Countries', navContact: 'Contact', menuOpen: 'Menu', menuClose: 'Close',
     heroEyebrow: 'Technology partner for businesses and public sector · since 2015',
     w1: 'Strategy.', w2: 'Innovation.', w3: 'Performance.',
     scrollHint: 'Scroll to enter',
@@ -47,7 +47,7 @@ export const TRANSLATIONS = {
     beat2: 'Your data travels fast and secure across our network.',
     beat3: 'All the way to your website, on your customers’ screens.',
     heroSub: 'Software development, digital marketing and IT infrastructure: one partner for your company’s digital transformation.',
-    cta1: 'Free consultation', cta2: 'Explore our services',
+    cta1: 'Contact us', cta2: 'Explore our services',
     aboutTitle: 'We grow together with our clients.',
     aboutBody: 'Sodano Consulting was founded in 2015 in Valenzano (Bari), with a sales office in Rome, around a simple idea: bring businesses and public administrations the right technology at the right time.',
     aboutBody2: 'Developers, creatives and system engineers work as one team, so strategy, software and infrastructure speak the same language, and it shows in the results.',
@@ -63,7 +63,7 @@ export const TRANSLATIONS = {
     mapGo: 'Open the site',
     globeHint: 'Drag to rotate · click a country to switch language',
     contactTitle: 'Let’s talk about your project.',
-    contactSub: 'Tell us what you need: the first consultation is free.',
+    contactSub: 'Tell us what you need and we will get back to you.',
     office: 'Office', phone: 'Phone',
     officeAdmin: 'Administrative office', officeSales: 'Sales office',
     fName: 'Full name', fCompany: 'Company', fMsg: 'How can we help?', fSend: 'Send request',
@@ -77,7 +77,7 @@ export const TRANSLATIONS = {
     langSwitched: 'Site in English'
   },
   de: {
-    navAbout: 'Über uns', navServices: 'Leistungen', navMap: 'Länder', navContact: 'Kontakt',
+    navAbout: 'Über uns', navServices: 'Leistungen', navMap: 'Länder', navContact: 'Kontakt', menuOpen: 'Menü', menuClose: 'Schließen',
     heroEyebrow: 'Technologiepartner für KMU und öffentliche Verwaltung · seit 2015',
     w1: 'Strategie.', w2: 'Innovation.', w3: 'Performance.',
     scrollHint: 'Scrollen zum Eintauchen',
@@ -85,7 +85,7 @@ export const TRANSLATIONS = {
     beat2: 'Ihre Daten reisen schnell und sicher durch unser Netzwerk.',
     beat3: 'Bis zu Ihrer Website, auf den Bildschirmen Ihrer Kunden.',
     heroSub: 'Softwareentwicklung, digitales Marketing und IT-Infrastruktur: ein Partner für die digitale Transformation Ihres Unternehmens.',
-    cta1: 'Kostenlose Beratung', cta2: 'Leistungen entdecken',
+    cta1: 'Kontakt aufnehmen', cta2: 'Leistungen entdecken',
     aboutTitle: 'Wir wachsen gemeinsam mit unseren Kunden.',
     aboutBody: 'Sodano Consulting wurde 2015 in Valenzano (Bari) gegründet und hat ein Vertriebsbüro in Rom. Die Idee ist einfach: Unternehmen und Behörden die richtige Technologie zur richtigen Zeit zu bieten.',
     aboutBody2: 'Entwickler, Kreative und Systemtechniker arbeiten in einem Team. So sprechen Strategie, Software und Infrastruktur dieselbe Sprache, und das zeigt sich in den Ergebnissen.',
@@ -101,7 +101,7 @@ export const TRANSLATIONS = {
     mapGo: 'Website öffnen',
     globeHint: 'Ziehen zum Drehen · Land anklicken, um die Sprache zu wechseln',
     contactTitle: 'Sprechen wir über Ihr Projekt.',
-    contactSub: 'Erzählen Sie uns, was Sie brauchen: Die erste Beratung ist kostenlos.',
+    contactSub: 'Erzählen Sie uns, was Sie brauchen, und wir melden uns bei Ihnen.',
     office: 'Sitz', phone: 'Telefon',
     officeAdmin: 'Verwaltungssitz', officeSales: 'Vertriebsbüro',
     fName: 'Vor- und Nachname', fCompany: 'Unternehmen', fMsg: 'Wie können wir helfen?', fSend: 'Anfrage senden',
@@ -115,7 +115,7 @@ export const TRANSLATIONS = {
     langSwitched: 'Website auf Deutsch'
   },
   nl: {
-    navAbout: 'Over ons', navServices: 'Diensten', navMap: 'Landen', navContact: 'Contact',
+    navAbout: 'Over ons', navServices: 'Diensten', navMap: 'Landen', navContact: 'Contact', menuOpen: 'Menu', menuClose: 'Sluiten',
     heroEyebrow: 'Technologiepartner voor mkb en overheid · sinds 2015',
     w1: 'Strategie.', w2: 'Innovatie.', w3: 'Performance.',
     scrollHint: 'Scroll om binnen te gaan',
@@ -123,7 +123,7 @@ export const TRANSLATIONS = {
     beat2: 'Uw data reist snel en veilig over ons netwerk.',
     beat3: 'Tot aan uw website, op het scherm van uw klanten.',
     heroSub: 'Softwareontwikkeling, digitale marketing en IT-infrastructuur: één partner voor de digitale transformatie van uw bedrijf.',
-    cta1: 'Gratis adviesgesprek', cta2: 'Bekijk onze diensten',
+    cta1: 'Neem contact op', cta2: 'Bekijk onze diensten',
     aboutTitle: 'Wij groeien samen met onze klanten.',
     aboutBody: 'Sodano Consulting is in 2015 opgericht in Valenzano (Bari) en heeft een verkoopkantoor in Rome, met een eenvoudig idee: bedrijven en overheden de juiste technologie op het juiste moment bieden.',
     aboutBody2: 'Developers, creatieven en systeembeheerders werken in één team. Zo spreken strategie, software en infrastructuur dezelfde taal, en dat zie je terug in de resultaten.',
@@ -139,7 +139,7 @@ export const TRANSLATIONS = {
     mapGo: 'Website openen',
     globeHint: 'Sleep om te draaien · klik op een land om van taal te wisselen',
     contactTitle: 'Laten we het over uw project hebben.',
-    contactSub: 'Vertel ons wat u nodig heeft: het eerste adviesgesprek is gratis.',
+    contactSub: 'Vertel ons wat u nodig heeft en wij nemen contact met u op.',
     office: 'Vestiging', phone: 'Telefoon',
     officeAdmin: 'Administratief kantoor', officeSales: 'Verkoopkantoor',
     fName: 'Voor- en achternaam', fCompany: 'Bedrijf', fMsg: 'Waarmee kunnen we helpen?', fSend: 'Aanvraag versturen',

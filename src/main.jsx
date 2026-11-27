@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App.jsx';
-import { LanguageProvider } from './i18n/LanguageContext.jsx';
-import { ConsentProvider } from './consent/ConsentContext.jsx';
+import Root from './Root.jsx';
 // font ospitati in locale (nessuna richiesta a Google Fonts → nessun trasferimento di dati)
 import '@fontsource/sora/400.css';
 import '@fontsource/sora/600.css';
@@ -16,12 +14,13 @@ import '@fontsource/jetbrains-mono/400.css';
 import '@fontsource/jetbrains-mono/600.css';
 import './styles/global.css';
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+const container = document.getElementById('root');
+const app = (
   <React.StrictMode>
-    <LanguageProvider>
-      <ConsentProvider>
-        <App />
-      </ConsentProvider>
-    </LanguageProvider>
+    <Root url={window.location.pathname} />
   </React.StrictMode>
 );
+
+// pagine generate in build: React "si aggancia" all'HTML già presente; in sviluppo la pagina parte vuota
+if (container.firstElementChild) ReactDOM.hydrateRoot(container, app);
+else ReactDOM.createRoot(container).render(app);

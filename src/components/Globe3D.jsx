@@ -33,6 +33,12 @@ const VIEW = {
   nl: { lat: 52.2, lng: 5.3, altitude: 1.05 }
 };
 
+// sui telefoni il globo è più stretto: allontaniamo la camera perché l'Europa entri tutta
+const viewFor = (code) => {
+  const v = VIEW[code] || VIEW.home;
+  return window.innerWidth < 600 ? { ...v, altitude: v.altitude * 1.45 } : v;
+};
+
 const Globe3D = forwardRef(function Globe3D({ lang, onPick }, ref) {
   const globeRef = useRef(null);
   const boxRef = useRef(null);
@@ -65,7 +71,7 @@ const Globe3D = forwardRef(function Globe3D({ lang, onPick }, ref) {
   useEffect(() => {
     const g = globeRef.current;
     if (!g) return;
-    g.pointOfView(VIEW.home, 0);
+    g.pointOfView(viewFor('home'), 0);
     const c = g.controls();
     c.enableZoom = false;
     c.autoRotate = false;
@@ -92,7 +98,7 @@ const Globe3D = forwardRef(function Globe3D({ lang, onPick }, ref) {
     const g = globeRef.current;
     if (!g) return;
     idleUntil.current = performance.now() + ms + 8000;
-    g.pointOfView(VIEW[code] || VIEW.home, ms);
+    g.pointOfView(viewFor(code), ms);
   }
   function zoom(delta) {
     const g = globeRef.current;

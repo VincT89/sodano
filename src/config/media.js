@@ -1,3 +1,7 @@
+/* Indirizzo pubblico del sito: serve per canonical, hreflang e sitemap.
+   indexable: false aggiunge noindex a tutte le pagine (utile su un indirizzo di prova). */
+export const SITE = { url: 'https://clienti.sodanoconsulting.it', indexable: true };
+
 /* Tutti i video e le immagini del sito in un unico posto (cartella public/assets). */
 export const MEDIA = {
   logo: '/assets/logo.png',
@@ -59,6 +63,7 @@ export const COMPANY = {
   address: 'Via Eduardo De Filippo, 4 · 70010 Valenzano (BA)',
   vat: '08962440726',
   capital: '10.000 €',
+  social: ['https://www.facebook.com/sodanoconsulting/', 'https://www.instagram.com/sodanoconsulting/'], // dal sito sodanoconsulting.it
   rea: null // es. 'BA-123456': numero REA (Registro Imprese), da aggiungere se disponibile
 };
 

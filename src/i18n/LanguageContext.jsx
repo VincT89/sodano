@@ -1,23 +1,19 @@
-import { createContext, useCallback, useContext, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { createContext, useCallback, useContext, useEffect, useLayoutEffect, useMemo, useRef } from 'react';
 import { TRANSLATIONS } from './translations.js';
+import { PAGE_TEXT } from './pages.js';
+import { useRouter } from '../router/Router.jsx';
+import { LANGS, pathFor } from '../router/routes.js';
 
-export const LANGS = ['it', 'en', 'de', 'nl'];
+export { LANGS };
 const LanguageContext = createContext(null);
+const useIso = typeof window === 'undefined' ? useEffect : useLayoutEffect;
+const STORE = 'sodano-lang';
 
-function initialLang() {
-  try {
-    const saved = localStorage.getItem('sodano-lang');
-    if (saved && TRANSLATIONS[saved]) return saved;
-  } catch (e) { /* storage non disponibile */ }
-  return 'it';
-}
-
-/* Elemento di riferimento in cima allo schermo: dopo il cambio lingua i testi cambiano lunghezza,
+/* Elemento di riferimento sullo schermo: dopo il cambio lingua i testi cambiano lunghezza,
    quindi riportiamo questo elemento esattamente dov'era (la pagina non "salta"). */
 function findAnchor() {
-  // l'elemento più vicino al centro dello schermo: è quello che l'utente sta guardando
   const mid = window.innerHeight * 0.45;
-  const els = document.querySelectorAll('main section, main .stat, main .office, main form, main .desk-stage, main .globe-stage, main h2, main .lead, main .muted, main label');
+  const els = document.querySelectorAll('main section, main .stat, main .office, main form, main .desk-stage, main .globe-stage, main h1, main h2, main .lead, main .muted, main label');
   let best = null, bestD = Infinity;
   for (const el of els) {
     const r = el.getBoundingClientRect();
@@ -28,18 +24,26 @@ function findAnchor() {
   return best;
 }
 
+/* La lingua viene dall'indirizzo (/en/, /de/, /nl/; l'italiano è nella radice).
+   Cambiare lingua significa andare alla stessa pagina nell'altra lingua, se esiste, altrimenti alla home. */
 export function LanguageProvider({ children }) {
-  const [lang, setLangState] = useState(initialLang);
+  const { route, navigate } = useRouter();
+  const lang = route.lang;
   const anchor = useRef(null);
 
   const setLang = useCallback((next) => {
-    if (!TRANSLATIONS[next]) return;
-    anchor.current = findAnchor();
-    setLangState(next);
-    try { localStorage.setItem('sodano-lang', next); } catch (e) { /* ignora */ }
-  }, []);
+    if (!TRANSLATIONS[next] || next === lang) return;
+    try { localStorage.setItem(STORE, next); } catch (e) { /* ignora */ }
+    const same = pathFor(route.page, next, route.id);
+    if (same) {
+      anchor.current = findAnchor();
+      navigate(same, { keepScroll: true });
+    } else {
+      navigate(pathFor('home', next));
+    }
+  }, [lang, route, navigate]);
 
-  useLayoutEffect(() => {
+  useIso(() => {
     const a = anchor.current;
     anchor.current = null;
     if (!a || !a.el.isConnected) return;
@@ -49,7 +53,17 @@ export function LanguageProvider({ children }) {
 
   useEffect(() => { document.documentElement.lang = lang; }, [lang]);
 
-  const value = useMemo(() => ({ lang, setLang, t: TRANSLATIONS[lang] }), [lang, setLang]);
+  // chi aveva scelto un'altra lingua e torna sulla home italiana viene riportato alla sua lingua
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(STORE);
+      if (window.location.pathname === '/' && !window.location.hash && saved && saved !== 'it' && TRANSLATIONS[saved]) {
+        navigate(pathFor('home', saved), { replace: true });
+      }
+    } catch (e) { /* ignora */ }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const value = useMemo(() => ({ lang, setLang, t: { ...TRANSLATIONS[lang], ...PAGE_TEXT[lang] } }), [lang, setLang]);
   return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
 }
 

@@ -1,4 +1,6 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import { createContext, useCallback, useContext, useEffect, useLayoutEffect, useMemo, useState } from 'react';
+
+const useIso = typeof window === 'undefined' ? useEffect : useLayoutEffect;
 import { TRACKING } from '../config/media.js';
 
 /* Consenso cookie (GDPR / Linee guida Garante Privacy 2021):
@@ -43,7 +45,9 @@ function applyTracking(c) {
 }
 
 export function ConsentProvider({ children }) {
-  const [consent, setConsent] = useState(readSaved);
+  // la scelta salvata si legge dopo il primo disegno: così l'HTML generato in build e la pagina coincidono
+  const [consent, setConsent] = useState(null);
+  useIso(() => { setConsent(readSaved()); }, []);
   const [panelOpen, setPanelOpen] = useState(false);
 
   const save = useCallback((choice) => {

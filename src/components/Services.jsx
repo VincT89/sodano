@@ -28,6 +28,13 @@ export default function Services() {
 
   useEffect(() => () => timers.current.forEach(clearTimeout), []);
 
+  // arrivo da "Torna ai servizi" in una pagina servizio: riapre il pannello di quell'area
+  useEffect(() => {
+    let key = null;
+    try { key = sessionStorage.getItem('sodano-open-pillar'); sessionStorage.removeItem('sodano-open-pillar'); } catch (e) { /* ignora */ }
+    if (key && HOTSPOTS.some((h) => h.key === key)) timers.current.push(setTimeout(() => setOpen(key), 150));
+  }, []);
+
   function enter(key) {
     if (prefersReducedMotion()) { setOpen(key); return; }
     const h = HOTSPOTS.find((x) => x.key === key);

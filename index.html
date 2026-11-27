@@ -3,13 +3,20 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Sodano Consulting – Strategia, Innovazione, Performance</title>
-    <meta name="description" content="Sviluppo software, marketing digitale e infrastrutture IT per PMI e Pubbliche Amministrazioni." />
+    <!--head-->
+    <title>Sodano Consulting – Sviluppo software, marketing e infrastrutture IT</title>
+    <meta name="description" content="Sviluppo software, marketing digitale e infrastrutture IT per PMI e Pubbliche Amministrazioni. Sedi a Valenzano (BA) e Roma." />
+    <!--/head-->
     <link rel="icon" href="/assets/logo.png" />
     <meta name="theme-color" content="#0B0B0F" />
+    <script>
+      /* chi ha già scelto sui cookie non vede il banner nemmeno per un istante */
+      try { var c = JSON.parse(localStorage.getItem('sodano-consent') || 'null'); if (c && c.v === 1 && Date.now() - c.date < 15552000000) document.documentElement.classList.add('has-consent'); } catch (e) {}
+    </script>
+    <noscript><style>.reveal,.reveal *{opacity:1!important;transform:none!important}.preloader{display:none!important}</style></noscript>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root"><!--app--></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

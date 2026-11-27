@@ -37,14 +37,15 @@ $email   = filter_var(trim($d['email'] ?? ''), FILTER_VALIDATE_EMAIL);
 $phone   = $clean($d['phone'] ?? '', 40);
 $service = $clean($d['service'] ?? '', 40);
 $lang    = $clean($d['lang'] ?? 'it', 5);
+$page    = $clean($d['page'] ?? '', 120);
 $message = trim(mb_substr(strip_tags((string)($d['message'] ?? '')), 0, 5000));
 $consent = !empty($d['consent']);
 
 if (!$name || !$email || !$message || !$consent) out(422, ['ok' => false, 'error' => 'validation']);
 
-$subject = 'Nuova richiesta dal sito' . ($service ? " – $service" : '') . " – $name";
+$subject = 'Nuova richiesta dal sito' . ($page ? " – $page" : ($service ? " – $service" : '')) . " – $name";
 $body = "Nuova richiesta dal modulo contatti di sodanoconsulting.it\n\n"
-      . "Nome: $name\nAzienda: $company\nEmail: $email\nTelefono: $phone\nArea: $service\nLingua: $lang\n\n"
+      . "Nome: $name\nAzienda: $company\nEmail: $email\nTelefono: $phone\nArea: $service\nPagina: " . ($page ?: 'home') . "\nLingua: $lang\n\n"
       . "Messaggio:\n$message\n\n"
       . "Consenso privacy: sì – " . date('d/m/Y H:i') . " – IP $ip\n";
 

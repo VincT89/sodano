@@ -1,0 +1,78 @@
+/* Countdown per il lancio del nuovo sito (1 gennaio 2027). Pagina statica, indipendente dall'app React. */
+@font-face{font-family:'Sora';font-weight:700;font-display:swap;src:url(fonts/sora-latin-700-normal.woff2) format('woff2')}
+@font-face{font-family:'Manrope';font-weight:400;font-display:swap;src:url(fonts/manrope-latin-400-normal.woff2) format('woff2')}
+@font-face{font-family:'Manrope';font-weight:500;font-display:swap;src:url(fonts/manrope-latin-500-normal.woff2) format('woff2')}
+:root{--bg:#0B0B0F;--red:#E30000;--red-soft:#FF5A52;--text:#F5F3F0;--text-2:#B9B7BE;--muted:#8C8C96}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{background:var(--bg);color:var(--text);font-family:'Manrope',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.bg{position:fixed;inset:0;overflow:hidden;background:#050506}
+.bg video,.bg .lit{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 72%;transition:opacity .5s}
+#v-boot,.bg .lit{opacity:0}
+h1,.sub,.contacts{transition:opacity 1.2s .3s,transform 1.2s .3s}
+.skip{position:fixed;right:calc(20px + env(safe-area-inset-right));bottom:calc(18px + env(safe-area-inset-bottom));z-index:6;pointer-events:auto;background:rgba(11,11,15,.55);color:#D6D4DA;border:1px solid #3A3A44;border-radius:999px;min-height:44px;padding:0 18px;font:500 14px Manrope,sans-serif;cursor:pointer;opacity:0;transition:opacity .4s}
+.watch{display:none;margin:16px 0 0;pointer-events:auto;background:rgba(11,11,15,.55);color:#F5F3F0;border:1px solid #3A3A44;border-radius:999px;min-height:44px;padding:0 20px;font:500 15px Manrope,sans-serif;cursor:pointer}
+.watch:hover{border-color:var(--red-soft)}
+.can-watch .watch{display:inline-flex;align-items:center}
+.skip:hover{border-color:var(--red-soft);color:#fff}
+.skip[hidden]{display:none}
+.booting #v-boot{opacity:1}
+#v-boot{object-position:50% 50%}
+.booting #v-idle{opacity:0}
+.booting h1,.booting .sub,.booting .contacts,.booting .enter{opacity:0;pointer-events:none}
+.booting .skip{opacity:1}
+.booted .bg::after{background:linear-gradient(180deg,rgba(5,5,6,.85) 0%,rgba(5,5,6,.55) 45%,rgba(5,5,6,.2) 75%)}
+.booted .bg .lit{opacity:1}
+.bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,5,6,.75) 0%,rgba(5,5,6,.35) 32%,rgba(5,5,6,0) 52%)}
+@media (max-aspect-ratio:1/1){
+  .bg video,.bg .lit{top:auto;bottom:0;height:min(80vw,46vh);object-fit:cover;object-position:50% 60%}
+  .booting #v-boot{top:50%;bottom:auto;height:min(100vw,62vh);transform:translateY(-50%)}
+  .booting .bg::after{opacity:0}
+  .bg::after{background:linear-gradient(180deg,rgba(5,5,6,1) 0%,rgba(5,5,6,1) calc(100% - min(80vw,46vh)),rgba(5,5,6,0) calc(100% - min(80vw,46vh) + 70px))}
+  body .page{padding-bottom:calc(min(80vw,46vh) - 10px + env(safe-area-inset-bottom))}
+  body .contacts{margin-top:28px}
+}
+.page{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;padding:calc(24px + env(safe-area-inset-top)) calc(clamp(20px,4vw,48px) + env(safe-area-inset-right)) calc(28px + env(safe-area-inset-bottom)) calc(clamp(20px,4vw,48px) + env(safe-area-inset-left));pointer-events:none}
+.page a{pointer-events:auto}
+.brand{display:flex;align-items:center;gap:12px;font-family:'Sora',sans-serif;font-weight:700;font-size:18px}
+.brand img{width:34px;height:auto}
+.brand em{font-style:normal;color:var(--red-soft)}
+main{flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;padding-top:clamp(10px,3vh,40px);text-shadow:0 2px 18px rgba(11,11,15,.85)}
+#cd{display:flex;align-items:flex-start;justify-content:center;gap:clamp(4px,1vw,14px);font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(34px,min(11vw,15vh),104px);line-height:1;letter-spacing:-.02em;text-shadow:none;transition:opacity .9s,transform .9s,filter .9s}
+/* l'ombra va sul gruppo, fuori dai riquadri che ritagliano le cifre: così non si vedono i bordi */
+.nums{filter:drop-shadow(0 3px 16px rgba(5,5,6,.85))}
+.grp{display:flex;flex-direction:column;align-items:center}
+.nums{display:flex}
+/* riquadro largo quanto la cifra più larga (lo 0 di Sora è ~0,76em); il ritaglio è solo in verticale, per il rullo */
+.dig{display:block;width:.76em;height:1em;position:relative;overflow:visible;clip-path:inset(0 -.2em)}
+.reel{display:block;will-change:transform}
+.reel span{display:block;height:1em;text-align:center}
+.dig.tick{animation:flash .9s ease-out}
+@keyframes flash{0%{color:#fff}20%{color:#FF6A62}100%{color:var(--text)}}
+.colon{color:var(--red);animation:beat 1s infinite;padding:0 .02em;transform:translateY(-.04em)}
+@keyframes beat{0%,100%{opacity:1}50%{opacity:.25}}
+.unit{font-family:'Manrope',sans-serif;font-weight:500;font-size:clamp(12px,1.05vw,15px);letter-spacing:0;color:var(--muted);margin-top:10px}
+h1{font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(24px,3vw,40px);line-height:1.15;letter-spacing:-.02em;margin:clamp(12px,2.5vh,28px) 0 12px;max-width:860px;transition:opacity .6s,transform .6s}
+.sub{font-size:clamp(15px,1.4vw,18px);line-height:1.6;color:#D6D4DA;margin:0;max-width:680px}
+.enter{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 26px;margin-top:26px;border-radius:999px;background:var(--red);color:#fff;font-weight:700;font-size:16px;text-decoration:none;text-shadow:none;box-shadow:0 10px 30px -10px rgba(227,0,0,.7);transition:transform .25s,background .25s}
+.enter:hover{transform:translateY(-2px);background:#F20D0D}
+.contacts{margin:auto 0 0;padding-top:28px;color:var(--text-2);font-size:15px;line-height:1.9}
+.contacts a{color:var(--text);text-decoration:none;display:inline-block;padding:10px 4px;line-height:1}
+.contacts a:hover{color:#fff}
+.contacts .sep{margin:0 8px;color:#4A4A54}
+[hidden]{display:none!important}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.is-done #cd{opacity:0;transform:scale(1.15);filter:blur(10px)}
+.show-done #cd{display:none}
+.show-done main{padding-top:clamp(20px,8vh,90px)}
+.show-done h1{font-size:clamp(30px,4vw,56px)}
+@media (max-width:520px){.contacts .sep{display:none}.contacts a{display:block;margin:0 auto}}
+@media (prefers-reduced-motion:reduce){.dig.tick,.colon{animation:none}}
+.actions{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:22px;pointer-events:auto;transition:opacity 1.2s .3s,transform 1.2s .3s}
+.actions .btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 22px;border-radius:999px;font:700 15px Manrope,sans-serif;text-decoration:none;cursor:pointer;text-shadow:none;transition:transform .25s,background .25s,border-color .25s}
+.actions .ghost{background:rgba(11,11,15,.55);color:var(--text);border:1px solid #3A3A44}
+.actions .ghost:hover{border-color:var(--red-soft)}
+.actions .primary{background:var(--red);color:#fff;border:0;box-shadow:0 10px 30px -10px rgba(227,0,0,.7)}
+.actions .primary:hover{transform:translateY(-2px);background:#F20D0D}
+.booting .actions{opacity:0;transform:translateY(10px);pointer-events:none}

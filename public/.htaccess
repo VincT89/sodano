@@ -2,6 +2,17 @@
 DirectoryIndex index.html
 Options -Indexes
 
+# Countdown del lancio: fino al 1° gennaio 2027 chi apre la home vede prima il countdown, una volta per sessione.
+# "Entra nel sito" imposta il cookie sodano_cd e da lì la home è quella vera. Motori di ricerca e anteprime
+# dei social vedono sempre la home. %{TIME} è l'ora del server: se il server è in UTC usare 20261231230000.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{TIME} <20270101000000
+  RewriteCond %{HTTP_COOKIE} !(^|;\s*)sodano_cd=1
+  RewriteCond %{HTTP_USER_AGENT} !(bot|crawl|spider|slurp|facebookexternalhit|whatsapp|telegram|linkedin|twitter|preview) [NC]
+  RewriteRule ^(index\.html)?$ /countdown/index.html [L]
+</IfModule>
+
 # Indirizzi inesistenti: pagina "non trovata" del sito (con codice 404)
 ErrorDocument 404 /404.html
 

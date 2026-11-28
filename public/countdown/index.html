@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sodano Consulting – Il nuovo sito arriva il 1° gennaio 2027</title>
+<meta name="description" content="Il 1° gennaio 2027 arriva il nuovo sito di Sodano Consulting: siti e software su misura, marketing digitale, infrastrutture IT e cloud.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0B0B0F">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Il 1° gennaio accendiamo il nuovo Sodano Consulting">
+<meta property="og:description" content="Siti e software su misura, marketing digitale, infrastrutture IT e cloud: tutto in un unico posto.">
+<meta property="og:image" content="/countdown/media/lit.jpg">
+<link rel="icon" href="/assets/logo.png">
+<link rel="preload" href="/countdown/fonts/sora-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/countdown/countdown.css">
+</head>
+<body>
+<div class="bg" aria-hidden="true">
+  <video id="v-idle" webkit-playsinline src="/countdown/media/idle.mp4" poster="/countdown/media/dark.jpg" autoplay muted loop playsinline preload="auto"></video>
+  <video id="v-boot" webkit-playsinline src="/countdown/media/finale.mp4" poster="/countdown/media/dark.jpg" muted playsinline preload="none"></video>
+  <img class="lit" src="/countdown/media/lit.jpg" alt="">
+</div>
+<button type="button" class="skip" id="skip" hidden></button>
+<div class="page">
+  <div class="brand"><img src="/assets/logo.png" width="34" height="36" alt=""><span>Sodano <em>Consulting</em></span></div>
+  <main>
+    <div id="cd" aria-hidden="true"></div>
+    <p class="sr" id="sr" role="timer"></p>
+    <h1 id="title"></h1>
+    <p class="sub" id="sub"></p>
+    <button type="button" class="watch" id="watch"></button>
+    <a class="enter" id="enter" href="/" hidden></a>
+    <div class="actions"><button type="button" class="btn ghost" id="preview"></button><a class="btn primary" id="go" href="/"></a></div>
+    <p class="contacts"><span id="meanwhile"></span><br><a href="mailto:info@sodanoconsulting.it">info@sodanoconsulting.it</a><span class="sep">/</span><a href="tel:+393341043006">+39 334 104 3006</a><span class="sep">/</span><a href="tel:+390683390516">06 8339 0516</a></p>
+  </main>
+</div>
+<script src="/countdown/countdown.js"></script>
+</body>
+</html>

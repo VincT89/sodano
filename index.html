@@ -7,6 +7,16 @@
     <title>Sodano Consulting – Sviluppo software, marketing e infrastrutture IT</title>
     <meta name="description" content="Sviluppo software, marketing digitale e infrastrutture IT per PMI e Pubbliche Amministrazioni. Sedi a Valenzano (BA) e Roma." />
     <!--/head-->
+    <script>
+      /* countdown del lancio: fino al 1° gennaio 2027 chi apre la home vede prima il countdown (una volta per sessione).
+         Il .htaccess fa la stessa cosa lato server; questo copre lo sviluppo locale e i server che non leggono il .htaccess. */
+      try {
+        if (location.pathname === '/' && Date.now() < Date.UTC(2026, 11, 31, 23) && !/(^|;\s*)sodano_cd=1/.test(document.cookie) &&
+            !/bot|crawl|spider|slurp|facebookexternalhit|whatsapp|telegram|linkedin|twitter|preview/i.test(navigator.userAgent)) {
+          location.replace('/countdown/index.html' + location.search);
+        }
+      } catch (e) {}
+    </script>
     <link rel="icon" href="/assets/logo.png" />
     <meta name="theme-color" content="#0B0B0F" />
     <script>
